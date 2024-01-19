@@ -9,10 +9,12 @@ async function listFiles() {
     for (const file of files) {
       if (file instanceof Dirent) {
         if (file.isFile()) {
-          //   const pathFile = path.join(folderPath, file.name);
+          const pathFile = path.join(folderPath, file.name);
           const fileName = path.parse(file.name).name;
           const fileExtension = path.extname(file.name).slice(1);
-          console.log(`${fileName}-${fileExtension}`);
+          fs.stat(pathFile, (err, stats) => {
+            console.log(`${fileName} - ${fileExtension} - ${stats.size} bytes`);
+          });
         }
       }
     }
