@@ -12,7 +12,8 @@ stdin.on('data', (data) => {
     console.log('Goodbye using the exit');
     process.exit();
   } else {
-    writeStream.write(text + '\n', () => {
+    writeStream.write(text + '\n', (err) => {
+      if (err) throw err;
       //  console.log('File was modified');
     });
   }
