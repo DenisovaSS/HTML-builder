@@ -7,9 +7,8 @@ const writeStream = fs.createWriteStream(folderPath);
 stdout.write('Welcome! Type your text or type "exit" to quit\n');
 stdin.on('data', (data) => {
   const text = data.toString().trim();
-  //   console.log(name);
   if (text.toLowerCase() === 'exit') {
-    console.log('Goodbye using the exit');
+    stdout.write('Goodbye using the exit');
     process.exit();
   } else {
     writeStream.write(text + '\n', (err) => {
@@ -19,6 +18,6 @@ stdin.on('data', (data) => {
   }
 });
 process.on('SIGINT', () => {
-  console.log('\nGoodbye using the Ctrl+C');
+  stdout.write('\nGoodbye using the Ctrl+C');
   process.exit();
 });
